@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="it-IT">
+	<head>
+		<title>Sondaggio</title>
+		<meta charset="utf-8">
+		<style>
+			body
+			{
+				background-color: yellow;
+			}
+
+			h1
+			{
+				text-align: center;
+				transition: .5s;
+			}
+
+			h1:hover
+			{
+				color: red;
+				transition: .5s;
+			}
+
+			div
+			{
+				position: absolute;
+				width: 500px;
+				height: 500px;
+				border: 1px solid black;
+				left: 50%;
+				margin-left: -250px;
+			}
+		</style>
+		<script>
+			
+		</script>
+	</head>
+	<body>
+		<h1>Domande</h1>
+		<div>
+			{% lorem 2 p %}
+			{% if elenco_domande %}
+			<ul>
+			{% for domanda in elenco_domande %}
+			    <li><a href="/sondaggio/{{ domanda.id }}/">{{ domanda.testo_domanda }}</a></li>
+			{% endfor %}
+			</ul>
+			{% else %}
+			<p>Nessuna domanda presente.</p>
+			{% endif %}
+		</div>
+	</body>
+</html>
