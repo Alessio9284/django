@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="it-IT">
+	<head>
+		<title>Sondaggio</title>
+		<meta charset="utf-8">
+		<style>
+			body
+			{
+				background-color: yellow;
+			}
+
+			h1
+			{
+				text-align: center;
+				transition: .5s;
+			}
+
+			h1:hover
+			{
+				color: red;
+				transition: .5s;
+			}
+
+			div
+			{
+				position: absolute;
+				width: 500px;
+				height: 500px;
+				border: 1px solid black;
+				left: 50%;
+				margin-left: -250px;
+			}
+		</style>
+		<script>
+			
+		</script>
+	</head>
+	<body>
+		<h1>{{ domanda.testo_domanda }}</h1>
+
+
+		{% for scelta in domanda.scelta_set.all %}
+		   <li>{{ scelta.testo_scelta }} -- {{ scelta.voto }} voti{{ scelta.votes|pluralize }}</li> 
+		{% endfor %}
+
+
+		<a href="/sondaggio/{{domanda.id}}">Votiamo ancora?</a>
+
+	</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="it-IT">
+	<head>
+		<title>Sondaggio</title>
+		<meta charset="utf-8">
+		<style>
+			body
+			{
+				background-color: yellow;
+			}
+
+			h1
+			{
+				text-align: center;
+				transition: .5s;
+			}
+
+			h1:hover
+			{
+				color: red;
+				transition: .5s;
+			}
+
+			div
+			{
+				position: absolute;
+				width: 500px;
+				height: 500px;
+				border: 1px solid black;
+				left: 50%;
+				margin-left: -250px;
+			}
+		</style>
+		<script>
+			
+		</script>
+	</head>
+	<body>
+		<h1>{{ domanda.testo_domanda }}</h1>
+
+		{% if errore %}<p><strong>{{ errore }}</strong></p>{% endif %}
+
+		<form action="{% url 'vote' domanda.id %}" method="post">
+		{% csrf_token %}
+		{% for scelta in domanda.scelta_set.all %}
+		    <input type="radio" name="scelta" id="scelta{{ forloop.counter }}" value="{{ scelta.id }}">
+		    <label for="scelta{{ forloop.counter }}">{{ scelta.testo_scelta }}</label><br>
+		{% endfor %}
+		<input type="submit" value="Vota!">
+		</form>
+	</body>
+</html>
