@@ -1,4 +1,6 @@
 from django.db import models
+from django.utils import timezone
+import datetime
 
 # Create your models here.
 class Domanda(models.Model):
@@ -7,6 +9,10 @@ class Domanda(models.Model):
 
     def __str__(self):
     	return self.testo_domanda
+
+    def pubblicata_di_recente(self):
+    	now = timezone.now()
+    	return (self.data_pub >= now - datetime.timedelta(days = 30)) and (self.data_pub < now)
 
 
 class Scelta(models.Model):
